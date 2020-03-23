@@ -11,7 +11,7 @@ fn init() {
 const SCRIPT_MOD_FN: &str = r#"<script>
 if (document.body.classList.contains('mod')) {
     var s = document.currentScript;
-    if (s.parentNode.parentNode.id != 'main') {
+    if (s.parentNode.parentNode.parentNode.id != 'main') {
         var n = s.parentNode.parentNode.children[0];
         n.classList.remove('deprecated');
         n.classList.add('unstable');
@@ -21,6 +21,23 @@ if (document.body.classList.contains('mod')) {
 </script>
 "#;
 
+const SCRIPT_STRUCT: &str = r#"<div class="stability export-unstable">
+<div class="stab unstable">
+<span class="emoji">💣</span>
+This struct is <strong>unstable</strong>, and requires the feature <code>unstable</code> to be enabled.
+</div>
+</div>
+<script>
+(function(){
+var l = document.body.classList
+if (l.contains('mod') || l.contains('struct')){
+  var s = document.currentScript;
+  var u = s.previousElementSibling;
+  var x = s.parentNode.previousElementSibling;
+  x.parentNode.replaceChild(u, x);
+}
+})()
+</script>"#;
 
 const SCRIPT_MOD: &str = r#"<div class="stability export-unstable">
 <div class="stab unstable">
@@ -100,7 +117,7 @@ fn unstable_item_struct(item_struct: ItemStruct) -> Result<TokenStream, syn::Err
     let doc_input = doc_input.join("\n");
     log::info!("{}", &doc_input);
 
-    let doc_input = format!("{}\n\n{}", doc_input, SCRIPT_MOD);
+    let doc_input = format!("{}\n\n{}", doc_input, SCRIPT_STRUCT);
 
     Ok(quote! {
         #[cfg(any(feature = "unstable", doc))]

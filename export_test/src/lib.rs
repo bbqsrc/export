@@ -18,7 +18,7 @@ fn lolwut3() {
 
 #[export::unstable]
 /// If I document this
-/// 
+///
 /// Is it happy?
 mod lolmod {
     #[export::unstable]
@@ -27,14 +27,10 @@ mod lolmod {
 
 #[export::unstable]
 /// They see my struct, they hatin'
-pub(crate) struct Foo {
-
-}
+pub(crate) struct Foo {}
 
 impl Foo {
     #[export::unstable]
     /// A dangerous function with no plan.
-    fn bar() {
-
-    }
+    fn bar() {}
 }
