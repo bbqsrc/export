@@ -5,6 +5,9 @@ authors = ["Brendan Molloy <brendan@bbqsrc.net>"]
 edition = "2018"
 
 [dependencies]
-syn = { version = "1.0.17", features = ["full"] }
+syn = { version = "1.0.17", features = ["full", "extra-traits"] }
 quote = "1.0.3"
 proc-macro2 = "1.0.9"
+log = "0.4.8"
+ctor = "0.1.13"
+env_logger = "0.7.1"
