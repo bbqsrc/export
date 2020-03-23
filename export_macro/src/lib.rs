@@ -12,7 +12,7 @@ const SCRIPT_MOD_FN: &str = r#"<script>
 if (document.body.classList.contains('mod')) {
     var s = document.currentScript;
     if (s.parentNode.parentNode.id != 'main') {
-        var n = s.parentNode.previousElementSibling;
+        var n = s.parentNode.parentNode.children[0];
         n.classList.remove('deprecated');
         n.classList.add('unstable');
         n.innerText = 'Unstable';
